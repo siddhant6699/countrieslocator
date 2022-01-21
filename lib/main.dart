@@ -11,13 +11,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Globe',
-      // theme: ThemeData(
-      //   primarySwatch: Colors.blue,
-      // ),
-      home: ContinentScreen(),
+      title: 'GLOBE',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const ContinentScreen(),
     );
   }
 }

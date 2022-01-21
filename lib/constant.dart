@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Constant {
 //const Color defaultDark = Color(0xffFFAB91);
@@ -8,4 +9,7 @@ class Constant {
   static const Color lightPurple = Color(0xffCF94DA);
   static const Color lightPink = Color(0xffF48FB1);
   static const Color lime = Color(0xff80CCC5);
+
+  static final titleStyle=GoogleFonts.lato(fontSize: 17);
+  static final contentStyle=GoogleFonts.lato(fontSize: 17);
 }
