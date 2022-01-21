@@ -42,8 +42,13 @@ class _CountryScreenState extends State<CountryScreen> {
                         return Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: ListTile(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                             leading: Image.network(
-                                state.countryListings[index].flag),
+                              state.countryListings[index].flag,
+                              width: 70,
+                            ),
                             tileColor: widget.color,
                             title: Text(
                               state.countryListings[index].name,
@@ -55,23 +60,24 @@ class _CountryScreenState extends State<CountryScreen> {
                       }),
                 );
               } else if (state is CountryListLoadError) {
+                print(state.error.toString());
                 return Center(
                     child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     Text(
                       'Oops!',
-                      style: TextStyle(
-                          fontSize: 30,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
                       height: 10,
                     ),
                     Text(
                       'You may need to try again later',
-                      style: TextStyle(fontSize: 20, color: Colors.white),
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
                     ),
                   ],
                 ));

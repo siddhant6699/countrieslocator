@@ -14,7 +14,7 @@ class CountryBloc extends Bloc<CountryEvent, CountryState> {
 
       try {
         final countryResponce =
-          await _countryRepositry.getCountry(event.region.toLowerCase());
+            await _countryRepositry.getCountry(event.region.toLowerCase());
         yield CountryListLoadSuccess(
             countryListings: countryResponce.countrylisting);
       } catch (e) {
