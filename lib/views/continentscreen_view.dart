@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 import 'dart:ui';
+import 'package:countrieslocator/country_bloc/country_bloc.dart';
 import 'package:countrieslocator/models/continent_models.dart';
 import 'package:countrieslocator/views/countryscreen_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:countrieslocator/constant.dart' as constant;
@@ -45,9 +47,12 @@ class _ContinentScreenState extends State<ContinentScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => CountryScreen(
-                                      color: continents[index].color,
-                                      continentName: continents[index].name),
+                                  builder: (context) => BlocProvider(
+                                    create: (context) => CountryBloc(),
+                                    child: CountryScreen(
+                                        color: continents[index].color,
+                                        continentName: continents[index].name),
+                                  ),
                                 ));
                           },
                           child: Container(
@@ -69,17 +74,16 @@ class _ContinentScreenState extends State<ContinentScreen> {
                                     fit: BoxFit.fill,
                                   ),
                                 ),
-                                Text(
-                                  continents[index].name,
-                                  style: constant.Constant.titleStyle
-                                ),
+                                Text(continents[index].name,
+                                    style: constant.Constant.titleStyle),
                               ],
                             ),
                           ),
                         );
                       },
                       staggeredTileBuilder: (index) {
-                        return StaggeredTile.count(1, index.isEven ? 1.25 : 1.05);
+                        return StaggeredTile.count(
+                            1, index.isEven ? 1.25 : 1.05);
                       }),
                 ],
               ),

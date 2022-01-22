@@ -18,7 +18,7 @@ class CountryBloc extends Bloc<CountryEvent, CountryState> {
         yield CountryListLoadSuccess(
             countryListings: countryResponce.countrylisting);
       } catch (e) {
-        yield CountryListLoadError(error: e);
+        yield CountryListLoadError(error: e.toString());
       }
     }
   }

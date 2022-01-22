@@ -12,6 +12,6 @@ class CountryListLoadSuccess extends CountryState {
 }
 
 class CountryListLoadError extends CountryState {
-  final error;
+  final String error;
   CountryListLoadError({required this.error});
 }
