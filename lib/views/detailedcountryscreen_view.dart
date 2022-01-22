@@ -28,8 +28,8 @@ class _DetailedScreenState extends State<DetailedScreen> {
         centerTitle: true,
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(0.0),
+        child: Hero(
+          tag: widget.countryDetails.name,
           child: SizedBox(
             height: 350,
             child: Card(
@@ -41,20 +41,19 @@ class _DetailedScreenState extends State<DetailedScreen> {
               elevation: 10,
               child: Column(
                 children: [
-                  Hero(
-                    tag: widget.countryDetails.name,
-                    child: CachedNetworkImage(
-                        height: 105,
-                        width: 105,
-                        imageUrl: widget.countryDetails.flag,
-                        errorWidget: (context, url, error) => const Icon(
-                              Icons.error,
-                              color: Colors.grey,
-                              size: 55,
-                            ),
-                        placeholder: (context, url) =>
-                            const Center(child: CircularProgressIndicator())),
-                  ),
+                  CachedNetworkImage(
+                      height: 105,
+                      width: 105,
+                      imageUrl: widget.countryDetails.flag,
+                      errorWidget: (context, url, error) => const Icon(
+                            Icons.error,
+                            color: Colors.grey,
+                            size: 55,
+                          ),
+                      placeholder: (context, url) =>
+                          const Center(child: CircularProgressIndicator(
+                            color: Colors.white,
+                          ))),
                   Text(
                     widget.countryDetails.countryCode,
                     style: const TextStyle(fontSize: 25, color: Colors.black),

@@ -117,33 +117,34 @@ class _CountryScreenState extends State<CountryScreen> {
                             ),
                             itemCount: searchList.length,
                             itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(7.0),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    _navigateToDetailPage(
-                                      countryListing: searchList[index],
-                                      color: widget.color,
-                                    );
-                                  },
-                                  child: ClipRRect(
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(15),
-                                    ),
-                                    child: Container(
-                                      color: widget.color,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Hero(
-                                            tag: searchList[index].name,
-                                            child: CachedNetworkImage(
+                              return Hero(
+                                tag: searchList[index].name,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(7.0),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      _navigateToDetailPage(
+                                        countryListing: searchList[index],
+                                        color: widget.color,
+                                      );
+                                    },
+                                    child: ClipRRect(
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(15),
+                                      ),
+                                      child: Container(
+                                        color: widget.color,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            CachedNetworkImage(
                                                 height: 100,
                                                 width: 125,
-                                                imageUrl: searchList[index].flag,
+                                                imageUrl:
+                                                    searchList[index].flag,
                                                 errorWidget:
                                                     (context, url, error) =>
                                                         const Icon(
@@ -151,15 +152,18 @@ class _CountryScreenState extends State<CountryScreen> {
                                                           color: Colors.grey,
                                                           size: 40,
                                                         ),
-                                                placeholder: (context, url) => Center(
-                                                    child:
-                                                        const CircularProgressIndicator())),
-                                          ),
-                                          Text(searchList[index].name,
-                                              overflow: TextOverflow.ellipsis,
-                                              style:
-                                                  constant.Constant.titleStyle),
-                                        ],
+                                                placeholder: (context, url) =>
+                                                    Center(
+                                                        child:
+                                                            const CircularProgressIndicator(
+                                                      color: Colors.white,
+                                                    ))),
+                                            Text(searchList[index].name,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: constant
+                                                    .Constant.titleStyle),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
