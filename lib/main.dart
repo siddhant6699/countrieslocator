@@ -14,9 +14,6 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'GLOBE',
-      // theme: ThemeData(
-      //   primarySwatch: Colors.grey,
-      // ),
       home: ContinentScreen(),
     );
   }

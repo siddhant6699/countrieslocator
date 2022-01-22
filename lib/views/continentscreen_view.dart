@@ -46,9 +46,6 @@ class _ContinentScreenState extends State<ContinentScreen> {
                     ),
                     shrinkWrap: true,
                     physics: const ScrollPhysics(),
-                    // crossAxisCount: 2,
-                    // crossAxisSpacing: 10,
-                    // mainAxisSpacing: 12,
                     itemCount: continents.length,
                     itemBuilder: (context, index) {
                       return GestureDetector(

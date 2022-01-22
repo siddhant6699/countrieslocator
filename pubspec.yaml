@@ -40,6 +40,7 @@ dependencies:
   http: ^0.13.4
   shared_preferences: ^2.0.12
   json_cache: ^1.0.0
+  cached_network_image: ^3.2.0
   flutter_bloc: 7.0.0
 
 dev_dependencies:

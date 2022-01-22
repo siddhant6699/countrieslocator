@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:countrieslocator/country_services/country_responce.dart';
 import 'package:flutter/material.dart';
 import 'package:countrieslocator/constant.dart' as constant;
@@ -5,12 +6,8 @@ import 'package:countrieslocator/constant.dart' as constant;
 class DetailedScreen extends StatefulWidget {
   final CountryListing countryDetails;
   final Color color;
-  final bool isOnline;
   const DetailedScreen(
-      {Key? key,
-      required this.countryDetails,
-      required this.color,
-      required this.isOnline})
+      {Key? key, required this.countryDetails, required this.color})
       : super(key: key);
 
   @override
@@ -24,7 +21,10 @@ class _DetailedScreenState extends State<DetailedScreen> {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: widget.color,
-        title: Text(widget.countryDetails.name,style: constant.Constant.titleStyle,),
+        title: Text(
+          widget.countryDetails.name,
+          style: constant.Constant.titleStyle,
+        ),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -41,17 +41,20 @@ class _DetailedScreenState extends State<DetailedScreen> {
               elevation: 10,
               child: Column(
                 children: [
-                  (widget.isOnline == true)
-                      ? Image.network(
-                          widget.countryDetails.flag,
-                          height: 105,
-                          width: 105,
-                        )
-                      : const Icon(
-                          Icons.error_outline_sharp,
-                          color: Colors.grey,
-                          size: 55,
-                        ),
+                  Hero(
+                    tag: widget.countryDetails.name,
+                    child: CachedNetworkImage(
+                        height: 105,
+                        width: 105,
+                        imageUrl: widget.countryDetails.flag,
+                        errorWidget: (context, url, error) => const Icon(
+                              Icons.error,
+                              color: Colors.grey,
+                              size: 55,
+                            ),
+                        placeholder: (context, url) =>
+                            const Center(child: CircularProgressIndicator())),
+                  ),
                   Text(
                     widget.countryDetails.countryCode,
                     style: const TextStyle(fontSize: 25, color: Colors.black),

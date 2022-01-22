@@ -28,8 +28,7 @@ class CountryBloc extends Bloc<CountryEvent, CountryState> {
         final countryResponce = await _countryRepositry.getCountry(
             event.region.toLowerCase(), isOnline);
         yield CountryListLoadSuccess(
-            countryListings: countryResponce.countrylisting,
-            isOnline: isOnline);
+            countryListings: countryResponce.countrylisting);
       } catch (e) {
         yield CountryListLoadError(error: e.toString());
       }

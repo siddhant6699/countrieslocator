@@ -8,9 +8,7 @@ class CountryListLoadInProgress extends CountryState {}
 
 class CountryListLoadSuccess extends CountryState {
   final List<CountryListing> countryListings;
-  final bool isOnline;
-  CountryListLoadSuccess(
-      {required this.countryListings, required this.isOnline});
+  CountryListLoadSuccess({required this.countryListings});
 }
 
 class CountryListLoadError extends CountryState {

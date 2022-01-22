@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:countrieslocator/country_bloc/country_bloc.dart';
 import 'package:countrieslocator/country_bloc/country_event.dart';
 import 'package:countrieslocator/country_bloc/country_state.dart';
@@ -121,9 +122,9 @@ class _CountryScreenState extends State<CountryScreen> {
                                 child: GestureDetector(
                                   onTap: () {
                                     _navigateToDetailPage(
-                                        countryListing: searchList[index],
-                                        color: widget.color,
-                                        isOnline: state.isOnline);
+                                      countryListing: searchList[index],
+                                      color: widget.color,
+                                    );
                                   },
                                   child: ClipRRect(
                                     borderRadius: const BorderRadius.all(
@@ -137,17 +138,23 @@ class _CountryScreenState extends State<CountryScreen> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          (state.isOnline == true)
-                                              ? Image.network(
-                                                  searchList[index].flag,
-                                                  height: 100,
-                                                  width: 125,
-                                                )
-                                              : Icon(
-                                                  Icons.error_outline_sharp,
-                                                  color: Colors.grey,
-                                                  size: 50,
-                                                ),
+                                          Hero(
+                                            tag: searchList[index].name,
+                                            child: CachedNetworkImage(
+                                                height: 100,
+                                                width: 125,
+                                                imageUrl: searchList[index].flag,
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        const Icon(
+                                                          Icons.error,
+                                                          color: Colors.grey,
+                                                          size: 40,
+                                                        ),
+                                                placeholder: (context, url) => Center(
+                                                    child:
+                                                        const CircularProgressIndicator())),
+                                          ),
                                           Text(searchList[index].name,
                                               overflow: TextOverflow.ellipsis,
                                               style:
@@ -198,15 +205,15 @@ class _CountryScreenState extends State<CountryScreen> {
     );
   }
 
-  void _navigateToDetailPage(
-      {required CountryListing countryListing,
-      required Color color,
-      required bool isOnline}) {
+  void _navigateToDetailPage({
+    required CountryListing countryListing,
+    required Color color,
+  }) {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => DetailedScreen(
-              countryDetails: countryListing, color: color, isOnline: isOnline),
+          builder: (context) =>
+              DetailedScreen(countryDetails: countryListing, color: color),
         ));
   }
 }
