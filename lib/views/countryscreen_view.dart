@@ -61,119 +61,10 @@ class _CountryScreenState extends State<CountryScreen> {
             builder: (context, state) {
               if (state is CountryListLoadInProgress) {
                 return const Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(color: Colors.white),
                 );
               } else if (state is CountryListLoadSuccess) {
-                return Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Column(
-                    children: [
-                      TextField(
-                        style: TextStyle(color: Colors.white),
-                        controller: searchController,
-                        textCapitalization: TextCapitalization.sentences,
-                        onChanged: (text) {
-                          if (text.trimRight().isEmpty) {
-                            searchList = state.countryListings;
-                          } else {
-                            final filteredList =
-                                state.countryListings.where((element) {
-                              return element.name
-                                  .toLowerCase()
-                                  .contains(text.toLowerCase().trimRight());
-                            }).toList();
-                            searchList = filteredList;
-                          }
-                          setState(() {});
-                        },
-                        decoration: InputDecoration(
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                            color: Colors.grey,
-                          )),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(),
-                          ),
-                          hintText: 'Search county...',
-                          hintStyle: TextStyle(color: Colors.white70),
-                          prefixIcon: Icon(
-                            Icons.search,
-                            color: Colors.white70,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Expanded(
-                        child: GridView.builder(
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 10.0,
-                              mainAxisSpacing: 10.0,
-                            ),
-                            itemCount: searchList.length,
-                            itemBuilder: (context, index) {
-                              return Hero(
-                                tag: searchList[index].name,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(7.0),
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      _navigateToDetailPage(
-                                        countryListing: searchList[index],
-                                        color: widget.color,
-                                      );
-                                    },
-                                    child: ClipRRect(
-                                      borderRadius: const BorderRadius.all(
-                                        Radius.circular(15),
-                                      ),
-                                      child: Container(
-                                        color: widget.color,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            CachedNetworkImage(
-                                                height: 100,
-                                                width: 125,
-                                                imageUrl:
-                                                    searchList[index].flag,
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        const Icon(
-                                                          Icons.error,
-                                                          color: Colors.grey,
-                                                          size: 40,
-                                                        ),
-                                                placeholder: (context, url) =>
-                                                    Center(
-                                                        child:
-                                                            const CircularProgressIndicator(
-                                                      color: Colors.white,
-                                                    ))),
-                                            Text(searchList[index].name,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: constant
-                                                    .Constant.titleStyle),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }),
-                      ),
-                    ],
-                  ),
-                );
+                return countryCard(state);
               } else if (state is CountryListLoadError) {
                 return Center(
                     child: Column(
@@ -205,6 +96,108 @@ class _CountryScreenState extends State<CountryScreen> {
             },
           ),
         ),
+      ),
+    );
+  }
+
+  Widget countryCard(CountryListLoadSuccess state) {
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: Column(
+        children: [
+          TextField(
+            style: TextStyle(color: Colors.white),
+            controller: searchController,
+            textCapitalization: TextCapitalization.sentences,
+            onChanged: (text) {
+              if (text.trimRight().isEmpty) {
+                searchList = state.countryListings;
+              } else {
+                final filteredList = state.countryListings.where((element) {
+                  return element.name
+                      .toLowerCase()
+                      .contains(text.toLowerCase().trimRight());
+                }).toList();
+                searchList = filteredList;
+              }
+              setState(() {});
+            },
+            decoration: InputDecoration(
+              focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                color: Colors.grey,
+              )),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(),
+              ),
+              hintText: 'Search county...',
+              hintStyle: TextStyle(color: Colors.white70),
+              prefixIcon: Icon(
+                Icons.search,
+                color: Colors.white70,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Expanded(
+            child: GridView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10.0,
+                  mainAxisSpacing: 10.0,
+                ),
+                itemCount: searchList.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(7.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        _navigateToDetailPage(
+                          countryListing: searchList[index],
+                          color: widget.color,
+                        );
+                      },
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(15),
+                        ),
+                        child: Container(
+                          color: widget.color,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              CachedNetworkImage(
+                                  height: 100,
+                                  width: 125,
+                                  imageUrl: searchList[index].flag,
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(
+                                        Icons.error,
+                                        color: Colors.grey,
+                                        size: 40,
+                                      ),
+                                  placeholder: (context, url) => Center(
+                                          child:
+                                              const CircularProgressIndicator(
+                                        color: Colors.white,
+                                      ))),
+                              Text(searchList[index].name,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: constant.Constant.titleStyle),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+          ),
+        ],
       ),
     );
   }

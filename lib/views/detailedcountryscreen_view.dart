@@ -28,100 +28,97 @@ class _DetailedScreenState extends State<DetailedScreen> {
         centerTitle: true,
       ),
       body: SafeArea(
-        child: Hero(
-          tag: widget.countryDetails.name,
-          child: SizedBox(
-            height: 350,
-            child: Card(
-              margin: const EdgeInsets.all(30),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              color: widget.color,
-              elevation: 10,
-              child: Column(
-                children: [
-                  CachedNetworkImage(
-                      height: 105,
-                      width: 105,
-                      imageUrl: widget.countryDetails.flag,
-                      errorWidget: (context, url, error) => const Icon(
-                            Icons.error,
-                            color: Colors.grey,
-                            size: 55,
-                          ),
-                      placeholder: (context, url) =>
-                          const Center(child: CircularProgressIndicator(
-                            color: Colors.white,
-                          ))),
-                  Text(
-                    widget.countryDetails.countryCode,
-                    style: const TextStyle(fontSize: 25, color: Colors.black),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Capital:',
-                              style: constant.Constant.contentStyle,
-                            ),
-                            Text(
-                              'Currency:',
-                              style: constant.Constant.contentStyle,
-                            ),
-                            Text(
-                              'Dialing Code:',
-                              style: constant.Constant.contentStyle,
-                            ),
-                            Text(
-                              'Population:',
-                              style: constant.Constant.contentStyle,
-                            ),
-                            Text(
-                              'Demonym:',
-                              style: constant.Constant.contentStyle,
-                            ),
-                          ],
+        child: SizedBox(
+          height: 350,
+          child: Card(
+            margin: const EdgeInsets.all(30),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            color: widget.color,
+            elevation: 10,
+            child: Column(
+              children: [
+                CachedNetworkImage(
+                    height: 105,
+                    width: 105,
+                    imageUrl: widget.countryDetails.flag,
+                    errorWidget: (context, url, error) => const Icon(
+                          Icons.error,
+                          color: Colors.grey,
+                          size: 55,
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              widget.countryDetails.capital,
-                              style: constant.Constant.contentStyle,
-                            ),
-                            Text(
-                              widget.countryDetails.currency!.name,
-                              style: constant.Constant.contentStyle,
-                            ),
-                            Text(
-                              widget.countryDetails.dialingCodeRoot +
-                                  widget.countryDetails.dialingCodeSuffix,
-                              style: constant.Constant.contentStyle,
-                            ),
-                            Text(
-                              gen(widget.countryDetails.population.toString()),
-                              style: constant.Constant.contentStyle,
-                            ),
-                            Text(
-                              widget.countryDetails.demonyms!.f,
-                              style: constant.Constant.contentStyle,
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
+                    placeholder: (context, url) =>
+                        const Center(child: CircularProgressIndicator(
+                          color: Colors.white,
+                        ))),
+                Text(
+                  widget.countryDetails.countryCode,
+                  style: const TextStyle(fontSize: 25, color: Colors.black),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Capital:',
+                            style: constant.Constant.contentStyle,
+                          ),
+                          Text(
+                            'Currency:',
+                            style: constant.Constant.contentStyle,
+                          ),
+                          Text(
+                            'Dialing Code:',
+                            style: constant.Constant.contentStyle,
+                          ),
+                          Text(
+                            'Population:',
+                            style: constant.Constant.contentStyle,
+                          ),
+                          Text(
+                            'Demonym:',
+                            style: constant.Constant.contentStyle,
+                          ),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            widget.countryDetails.capital,
+                            style: constant.Constant.contentStyle,
+                          ),
+                          Text(
+                            widget.countryDetails.currency!.name,
+                            style: constant.Constant.contentStyle,
+                          ),
+                          Text(
+                            widget.countryDetails.dialingCodeRoot +
+                                widget.countryDetails.dialingCodeSuffix,
+                            style: constant.Constant.contentStyle,
+                          ),
+                          Text(
+                            gen(widget.countryDetails.population.toString()),
+                            style: constant.Constant.contentStyle,
+                          ),
+                          Text(
+                            widget.countryDetails.demonyms!.f,
+                            style: constant.Constant.contentStyle,
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
         ),
