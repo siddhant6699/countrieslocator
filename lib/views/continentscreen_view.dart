@@ -1,11 +1,10 @@
 // ignore_for_file: prefer_const_constructors
-import 'dart:ui';
 import 'package:countrieslocator/country_bloc/country_bloc.dart';
 import 'package:countrieslocator/models/continent_models.dart';
 import 'package:countrieslocator/views/countryscreen_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:countrieslocator/constant.dart' as constant;
+import 'package:countrieslocator/constant.dart';
 
 class ContinentScreen extends StatefulWidget {
   const ContinentScreen({Key? key}) : super(key: key);
@@ -22,13 +21,12 @@ class _ContinentScreenState extends State<ContinentScreen> {
         backgroundColor: Colors.black,
         title: Text(
           "Globe",
-          style: constant.Constant.titleStyle,
+          style: Constant.titleStyle,
         ),
         centerTitle: true,
       ),
-      body: Scaffold(
-        backgroundColor: Colors.black,
-        body: SafeArea(
+      backgroundColor: Constant.pureblack,
+      body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(18, 10, 18, 0),
             child: SingleChildScrollView(
@@ -81,7 +79,7 @@ class _ContinentScreenState extends State<ContinentScreen> {
                                 ),
                               ),
                               Text(continents[index].name,
-                                  style: constant.Constant.titleStyle),
+                                  style: Constant.titleStyle),
                             ],
                           ),
                         ),
@@ -93,7 +91,6 @@ class _ContinentScreenState extends State<ContinentScreen> {
             ),
           ),
         ),
-      ),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:countrieslocator/country_services/country_responce.dart';
 import 'package:flutter/material.dart';
-import 'package:countrieslocator/constant.dart' as constant;
+import 'package:countrieslocator/constant.dart';
 
 class DetailedScreen extends StatefulWidget {
   final CountryListing countryDetails;
@@ -18,12 +18,12 @@ class _DetailedScreenState extends State<DetailedScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Constant.pureblack,
       appBar: AppBar(
         backgroundColor: widget.color,
         title: Text(
           widget.countryDetails.name,
-          style: constant.Constant.titleStyle,
+          style: Constant.titleStyle,
         ),
         centerTitle: true,
       ),
@@ -69,23 +69,23 @@ class _DetailedScreenState extends State<DetailedScreen> {
                         children: [
                           Text(
                             'Capital:',
-                            style: constant.Constant.contentStyle,
+                            style: Constant.contentStyle,
                           ),
                           Text(
                             'Currency:',
-                            style: constant.Constant.contentStyle,
+                            style: Constant.contentStyle,
                           ),
                           Text(
                             'Dialing Code:',
-                            style: constant.Constant.contentStyle,
+                            style: Constant.contentStyle,
                           ),
                           Text(
                             'Population:',
-                            style: constant.Constant.contentStyle,
+                            style: Constant.contentStyle,
                           ),
                           Text(
                             'Demonym:',
-                            style: constant.Constant.contentStyle,
+                            style: Constant.contentStyle,
                           ),
                         ],
                       ),
@@ -94,24 +94,24 @@ class _DetailedScreenState extends State<DetailedScreen> {
                         children: [
                           Text(
                             widget.countryDetails.capital,
-                            style: constant.Constant.contentStyle,
+                            style: Constant.contentStyle,
                           ),
                           Text(
                             widget.countryDetails.currency!.name,
-                            style: constant.Constant.contentStyle,
+                            style: Constant.contentStyle,
                           ),
                           Text(
                             widget.countryDetails.dialingCodeRoot +
                                 widget.countryDetails.dialingCodeSuffix,
-                            style: constant.Constant.contentStyle,
+                            style: Constant.contentStyle,
                           ),
                           Text(
                             gen(widget.countryDetails.population.toString()),
-                            style: constant.Constant.contentStyle,
+                            style: Constant.contentStyle,
                           ),
                           Text(
                             widget.countryDetails.demonyms!.f,
-                            style: constant.Constant.contentStyle,
+                            style: Constant.contentStyle,
                           ),
                         ],
                       )

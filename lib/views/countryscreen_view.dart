@@ -6,7 +6,7 @@ import 'package:countrieslocator/country_bloc/country_state.dart';
 import 'package:countrieslocator/country_services/country_responce.dart';
 import 'package:countrieslocator/views/detailedcountryscreen_view.dart';
 import 'package:flutter/material.dart';
-import 'package:countrieslocator/constant.dart' as constant;
+import 'package:countrieslocator/constant.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CountryScreen extends StatefulWidget {
@@ -41,12 +41,12 @@ class _CountryScreenState extends State<CountryScreen> {
         }
       },
       child: Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Constant.pureblack,
         appBar: AppBar(
           backgroundColor: widget.color,
           title: Text(
             widget.continentName.toUpperCase(),
-            style: constant.Constant.titleStyle,
+            style: Constant.titleStyle,
           ),
           centerTitle: true,
         ),
@@ -186,9 +186,11 @@ class _CountryScreenState extends State<CountryScreen> {
                                               const CircularProgressIndicator(
                                         color: Colors.white,
                                       ))),
-                              Text(searchList[index].name,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: constant.Constant.titleStyle),
+                              FittedBox(
+                                child: Text(searchList[index].name,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: Constant.titleStyle),
+                              ),
                             ],
                           ),
                         ),

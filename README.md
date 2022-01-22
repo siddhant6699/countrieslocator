@@ -1,16 +1,11 @@
 # countrieslocator
 
-A new Flutter project.
+A flutter app that lets a user to fetch regions and search countries through restCountries API and enable users to view the data even when offline.
 
-## Getting Started
+## App Features
 
-This project is a starting point for a Flutter application.
+1. View regions and countries through consuming restCountries API.
 
-A few resources to get you started if this is your first Flutter project:
+2. Search through the countries list.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+3. View cache data in case of no internet connection.
