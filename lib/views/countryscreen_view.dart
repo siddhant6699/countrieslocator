@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_const_constructors
-
 import 'package:countrieslocator/country_bloc/country_bloc.dart';
 import 'package:countrieslocator/country_bloc/country_event.dart';
 import 'package:countrieslocator/country_bloc/country_state.dart';
@@ -43,7 +42,11 @@ class _CountryScreenState extends State<CountryScreen> {
       child: Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
-          title: Text(widget.continentName.toUpperCase()),
+          backgroundColor: widget.color,
+          title: Text(
+            widget.continentName.toUpperCase(),
+            style: constant.Constant.titleStyle,
+          ),
           centerTitle: true,
         ),
         body: BlocListener(
@@ -69,14 +72,15 @@ class _CountryScreenState extends State<CountryScreen> {
                         controller: searchController,
                         textCapitalization: TextCapitalization.sentences,
                         onChanged: (text) {
-                          if (text.isEmpty) {
+                          if (text.trimRight().isEmpty) {
                             searchList = state.countryListings;
                           } else {
                             final filteredList =
                                 state.countryListings.where((element) {
-                              return element.name.contains(text);
+                              return element.name
+                                  .toLowerCase()
+                                  .contains(text.toLowerCase().trimRight());
                             }).toList();
-
                             searchList = filteredList;
                           }
                           setState(() {});
@@ -87,9 +91,7 @@ class _CountryScreenState extends State<CountryScreen> {
                             color: Colors.grey,
                           )),
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                //color: Colors.grey,
-                                ),
+                            borderSide: BorderSide(),
                           ),
                           hintText: 'Search county...',
                           hintStyle: TextStyle(color: Colors.white70),
@@ -120,7 +122,8 @@ class _CountryScreenState extends State<CountryScreen> {
                                   onTap: () {
                                     _navigateToDetailPage(
                                         countryListing: searchList[index],
-                                        color: widget.color);
+                                        color: widget.color,
+                                        isOnline: state.isOnline);
                                   },
                                   child: ClipRRect(
                                     borderRadius: const BorderRadius.all(
@@ -134,11 +137,17 @@ class _CountryScreenState extends State<CountryScreen> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          Image.network(
-                                            searchList[index].flag,
-                                            height: 100,
-                                            width: 125,
-                                          ),
+                                          (state.isOnline == true)
+                                              ? Image.network(
+                                                  searchList[index].flag,
+                                                  height: 100,
+                                                  width: 125,
+                                                )
+                                              : Icon(
+                                                  Icons.error_outline_sharp,
+                                                  color: Colors.grey,
+                                                  size: 50,
+                                                ),
                                           Text(searchList[index].name,
                                               overflow: TextOverflow.ellipsis,
                                               style:
@@ -161,8 +170,11 @@ class _CountryScreenState extends State<CountryScreen> {
                   children: const [
                     Text(
                       'Oops!',
-                      style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
                     SizedBox(
                       height: 10,
@@ -171,6 +183,7 @@ class _CountryScreenState extends State<CountryScreen> {
                       'You may need to try again later',
                       style: TextStyle(
                         fontSize: 20,
+                        color: Colors.white,
                       ),
                     ),
                   ],
@@ -186,12 +199,14 @@ class _CountryScreenState extends State<CountryScreen> {
   }
 
   void _navigateToDetailPage(
-      {required CountryListing countryListing, required Color color}) {
+      {required CountryListing countryListing,
+      required Color color,
+      required bool isOnline}) {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) =>
-              DetailedScreen(countryDetails: countryListing, color: color),
+          builder: (context) => DetailedScreen(
+              countryDetails: countryListing, color: color, isOnline: isOnline),
         ));
   }
 }

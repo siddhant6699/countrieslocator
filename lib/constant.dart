@@ -10,6 +10,7 @@ class Constant {
   static const Color lightPink = Color(0xffF48FB1);
   static const Color lime = Color(0xff80CCC5);
 
-  static final titleStyle=GoogleFonts.lato(fontSize: 17);
-  static final contentStyle=GoogleFonts.lato(fontSize: 12);
+  static final titleStyle = GoogleFonts.lato(fontSize: 22,fontWeight: FontWeight.bold);
+  static final contentStyle =
+      GoogleFonts.lato(fontSize: 12, fontWeight: FontWeight.bold);
 }
